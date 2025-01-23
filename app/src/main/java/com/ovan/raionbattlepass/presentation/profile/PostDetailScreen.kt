@@ -18,11 +18,12 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.ovan.raionbattlepass.model.repository.network.response.GetPostsByUserIdDataItem
+import com.ovan.raionbattlepass.util.DataStoreManager
 import com.ovan.raionbattlepass.util.Resource
 
 @Composable
-fun PostDetailScreen(navController: NavController, id: String) {
-    val viewModel: PostDetailViewModel = viewModel()
+fun PostDetailScreen(navController: NavController, dataStoreManager: DataStoreManager, id: String) {
+    val viewModel = PostDetailViewModel(dataStoreManager)
     val detailedPost by viewModel.post.collectAsState(initial = Resource.Loading())
     
     LaunchedEffect(Unit) {

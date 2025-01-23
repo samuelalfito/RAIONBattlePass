@@ -21,13 +21,17 @@ import com.ovan.raionbattlepass.model.repository.network.response.SearchPostsRes
 import com.ovan.raionbattlepass.model.repository.network.response.SearchUsersResponse
 import com.ovan.raionbattlepass.model.repository.network.response.UpdatePostResponse
 import com.ovan.raionbattlepass.model.repository.network.response.UpdateUserResponse
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.PUT
+import retrofit2.http.Part
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -64,12 +68,16 @@ interface ApiService {
     
     @PUT("/api/posts/{id}")
     suspend fun updatePost(
+        @Header("Authorization") token: String,
         @Path("id") id: String,
         @Body request: UpdatePostRequest,
     ): Response<UpdatePostResponse>
     
     @DELETE("/api/posts/{id}")
-    suspend fun deletePost(@Path("id") id: String): Response<DeletePostResponse>
+    suspend fun deletePost(
+        @Header("Authorization") token: String,
+        @Path("id") id: String,
+    ): Response<DeletePostResponse>
     
     @GET("/api/search/posts")
     suspend fun searchPosts(@Query("query") query: String): Response<SearchPostsResponse>
