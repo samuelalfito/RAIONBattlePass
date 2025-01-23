@@ -1,7 +1,6 @@
 package com.ovan.raionbattlepass.model.repository.network
 
 import com.ovan.raionbattlepass.data.ChangePasswordRequest
-import com.ovan.raionbattlepass.data.CreatePostRequest
 import com.ovan.raionbattlepass.data.GuestLoginRequest
 import com.ovan.raionbattlepass.data.GuestRegisterRequest
 import com.ovan.raionbattlepass.data.UpdatePostRequest
@@ -57,8 +56,13 @@ interface ApiService {
     @GET("/api/posts")
     suspend fun getPosts(): Response<GetPostsResponse>
     
+    @Multipart
     @POST("/api/posts")
-    suspend fun createPost(@Body createPostRequest: CreatePostRequest): Response<CreatePostResponse> // formData
+    suspend fun createPost(
+        @Header("Authorization") token: String,
+        @Part("caption") caption: RequestBody,
+        @Part image: MultipartBody.Part?
+    ): Response<CreatePostResponse>
     
     @GET("/api/posts/user/{user_id}")
     suspend fun getPostsByUserId(@Path("user_id") userId: String): Response<GetPostsByUserIdResponse>
