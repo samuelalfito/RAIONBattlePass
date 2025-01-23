@@ -31,7 +31,6 @@ import retrofit2.http.PUT
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-const val BASE_URL = "https://raion-battlepass.elginbrian.com/"
 const val BASE_URL = "https://raion-battlepass.elginbrian.com"
 
 interface ApiService {
