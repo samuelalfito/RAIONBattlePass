@@ -32,6 +32,7 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 const val BASE_URL = "https://raion-battlepass.elginbrian.com/"
+const val BASE_URL = "https://raion-battlepass.elginbrian.com"
 
 interface ApiService {
     
@@ -65,7 +66,7 @@ interface ApiService {
     @PUT("/api/posts/{id}")
     suspend fun updatePost(
         @Path("id") id: String,
-        request: UpdatePostRequest,
+        @Body request: UpdatePostRequest,
     ): Response<UpdatePostResponse>
     
     @DELETE("/api/posts/{id}")
